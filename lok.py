@@ -64,6 +64,7 @@ logo='''
 print(logo)
 token = input(p + f''' {C}[ {F}➠ {C}] {O}TOKEN  {F}: {W}''')
 id = input(p + f''' {C}[ {F}➠ {C}] {O}ID {F}: {W}''')
+os.system('clear')
 insta = '1234567890qwertyuiopasdf._ghjklzxcvbnm'
 ajw = '_'
 agents = ['Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Safari/537.36','Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Safari/537.36','Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Safari/537.36','Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Safari/537.36','Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Safari/537.36','Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Safari/537.36','Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Safari/537.36','Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Safari/537.36','Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Safari/537.36','Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Safari/537.36']
@@ -104,7 +105,7 @@ def instaa(user, agent):
         requests.post(f'''https://api.telegram.org/bot{token}/sendMessage?chat_id={id}&text={god}''')
 
 def generate_special_username():
-    litters = '1234567890'
+    litters = '1234567890abcdefghijklmnopqstuwxyz'
     num_letters = random.choice([2, 3, 3, 3, 3, 4, 4, 4, 3, 2, 4, 3])
     num_underscores = 5 - num_letters
     positions = random.sample(range(5), num_letters)
