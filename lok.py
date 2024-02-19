@@ -104,7 +104,7 @@ def instaa(user, agent):
         requests.post(f'''https://api.telegram.org/bot{token}/sendMessage?chat_id={id}&text={god}''')
 
 def generate_special_username():
-    litters = '1234567890lif'
+    litters = '1234567890abcdefghijklmnopqrstuvwxyz'
     num_letters = random.choice([2, 3, 3, 3, 3, 4, 4, 4, 3, 2, 4, 3])
     num_underscores = 5 - num_letters
     positions = random.sample(range(5), num_letters)
