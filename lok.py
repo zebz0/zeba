@@ -79,6 +79,7 @@ zebz = """
 printt(zebz, delay=0.001)
 ID = input(Back.RED + 'ENTER YOUR ID: ')
 token = input(Back.YELLOW + 'ENTER YOUR TOKEN: ')
+os.system('clear')
 def mahos(user):
     global gg, bb
     cookies = {
