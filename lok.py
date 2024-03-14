@@ -175,11 +175,11 @@ def randomusers():
         KK ="1234567890qwertyuiopasdfghjklzxcvbnm"
         zz = "1234567890"
         z1 = "._"
-        ZEBZ=''.join(random.choices(KK, k=1))
+        ZEBZ=''.join(random.choices('_', k=1))
         ZEBZ2=''.join(random.choices(KK, k=1))
-        ZEBZ3=''.join(random.choices('_', k=1))
-        ZEBZ4=''.join(random.choices('_', k=1))
-        ZEBZ5=''.join(random.choices(KK, k=1))
+        ZEBZ3=''.join(random.choices(KK, k=1))
+        ZEBZ4=''.join(random.choices(KK, k=1))
+        ZEBZ5=''.join(random.choices('_', k=1))
         ALL=ZEBZ+ZEBZ2+ZEBZ3+ZEBZ4+ZEBZ5
         user = ALL
         mahos(user)
