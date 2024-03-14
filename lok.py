@@ -1,50 +1,29 @@
-import random
 import requests
+import random
+from user_agent import generate_user_agent
+from colorama import Back, init
 import os
+import sys
+import subprocess
+import webbrowser
+import time
+import requests
+import threading
+import datetime
+init(autoreset=True)
+gg = 0
+bb = 0
+B = '\x1b[38;5;208m'  # برتقالي
+E = '\033[1;31m'  # أحمر
+F = '\033[2;32m'  # أخضر
+def printt(word, delay=1):
+        	for letter in word:
+        		sys.stdout.write(letter)
+        		sys.stdout.flush()
+        		time.sleep(delay)
 
-############################
-Z = '\033[1;31m' #احمر
-X = '\033[1;33m' #اصفر
-F = '\033[2;32m' #اخضر
-C = "\033[1;97m" #ابيض
-B = '\033[2;36m'#سمائي
-Y = '\033[1;34m' #ازرق فاتح.
-C = "\033[1;97m" #ابيض
-y = '\033[1;35m'#وردي
-f = '\033[2;35m'#بنفسجي
-z = '\033[3;33m'#اصفر طوخ
-G = '\033[2;36m'
-E = '\033[1;31m'
-V = '\033[1;35m'
-Z = '\033[1;31m' #احمر
-X = '\033[1;33m' #اصفر
-Z1 = '\033[2;31m' #احمر ثاني
-F = '\033[2;32m' #اخضر
-A = '\033[2;34m'#ازرق
-C = '\033[2;35m' #وردي
-B = '\033[2;36m'#سمائي
-Y = '\033[1;34m' #ازرق فاتح
-M = '\x1b[1;37m'#ابیض
-S = '\033[1;33m'
-U = '\x1b[1;37m'#ابیض
-BRed = '\x1b[1;31m'
-BGreen = '\x1b[1;32m'
-BYellow = '\x1b[1;33m'
-R = '\x1b[1;34m'
-Purple = '\x1b[1;35m'
-BCyan = '\x1b[1;36m'
-BWhite = '\x1b[1;37m'
-Z = '\033[1;31m' #احمر
-X = '\033[1;33m' #اصفر
-F = '\033[2;32m' #اخضر
-O = '\x1b[38;5;208m' #برتقالي
-BL = '\x1b[38;5;21m' #ازاق طوخ
-YU = '\x1b[38;5;200m' #وردي طوخ
-############################
+zebz = """
 
-
-
-log="""
 
         
         
@@ -70,70 +49,138 @@ log="""
         ⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⣶⣿⣿⢰⣾⣿⣶⣾⣿⠀⠀⠀⠀⠙⠛⠛⠀⠀⠀⢰⣿⣷⣶⣿⠋⢸⣿⣷⣶⣾⣿⠀⠀⠀⠀⠀⠀⠀        
         
     
-   
+    
 
 """
 
-print(log)
-
-
-tok = input(R+ ': توكن بوتك  '+X)
-id = input(C+ ': ايدي حسابك  '+X)
-
+print(zebz)
+ID = input(Back.RED + 'ENTER YOUR ID: ')
 os.system('clear')
-
-print(F+ ' _________________♡[المطوࢪه زيبز]♡_________________ ')
-													
+zebz = """
 
 
-cho = int(input(V+ ' خلي رقم 2 : '+y))
+        
+        
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⡤⠴⠶⠶⠷⠾⠶⠶⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠿⠦⣤⣤⣤⣤⣤⡤⠴⠒⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣉⣩⣶⣶⣤⣄⡀⠡⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡾⠛⠉⠀⠀⠀⠈⠉⠛⢷⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠒⡒⢄⠀⠀⠀⠀⣴⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠸⣀⡠⠃⠀⠀⢀⣿⠃⠀⣀⣄⡀⠀⠀⠀⠀⠀⠈⢄⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢦⡀⠀⠀⠀⠀⠘⣿⠀⢰⣿⣿⣿⠆⠀⠀⠀⢀⣴⣾⢿⡿⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢶⣤⣀⠀⠀⢿⡀⠀⢻⠛⠉⠀⠀⠀⠀⠘⠿⠟⣼⠇⠀⢀⣀⣤⡴⠒⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣴⣶⣾⣿⣿⣦⡀⠘⢧⡀⠘⠀⠀⠀⠀⠀⠀⠀⠀⣠⠟⢀⣠⣾⣿⣿⣷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀    
+        ⠐⠒⠲⢶⣿⣷⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣝⡲⣤⣄⣀⣀⣀⣠⣴⣾⣥⣶⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣤⣄⣀⣀⣀⣠⠜    
+        ⠀⠀⠀⠀⠠⠤⠤⠶⠾⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠋⠉⠛⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡍⠉⠛⠛⠛⠉⠁⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠞⠋⠉⠉⢩⣿⣿⣿⣿⣿⠇⡆⠀⠀⠀⢠⡹⣿⣿⣿⣿⠀⠈⠻⣿⡛⠷⡈⠛⢄⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⢠⡟⣉⣴⡿⠛⡟⢰⠇⠀⠀⠀⠸⡇⢻⣿⡗⠙⢷⡀⠀⠈⢣⡀⠈⠂⠀⠉⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠋⠀⢡⠏⠀⢸⠃⣼⠀⠀⠀⠀⠀⣷⠸⣿⣿⡄⠀⠱⠀⠀⠀⠑⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠹⡆⣿⡄⠀⠀⠀⢀⣿⣸⠙⡇⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⢰⣶⣶⣶⣶⣦⢰⣶⣶⣶⣶⣶⠀⠙⣿⡟⠀⣠⡄⢸⡿⠃⢰⣷⣶⣶⣤⡀⢰⣶⣶⣶⣶⣶⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠘⠛⢀⣼⡿⠃⠀⢸⣿⣀⠘⠛⠀⠀⠸⡇⠀⢸⠀⣾⠁⠀⠀⣿⣇⣀⣽⡿⠘⠛⢀⣴⡿⠃⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⠋⣀⣤⠀⢸⣿⠉⢠⣤⠀⠀⠀⢻⣄⣸⢸⡏⠀⠀⠀⣿⡏⠉⢻⣷⠀⣰⣿⠋⢀⣄⠀⠀⠀⠀⠀⠀⠀    
+        ⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⣶⣿⣿⢰⣾⣿⣶⣾⣿⠀⠀⠀⠀⠙⠛⠛⠀⠀⠀⢰⣿⣷⣶⣿⠋⢸⣿⣷⣶⣾⣿⠀⠀⠀⠀⠀⠀⠀        
+        
+    
+    
 
-os.system('clear')
-
-while True:
-	t = '1234567890'
-	n = '0987654321'	
-	m = 'QWERTYUIOPASDFGHJKLZXCVBNM'
-	g = '1234567890QWERTYUIOPASDFGHJKLZXCVBNM_.'
-				
-	a = "".join(random.choice(t)for i in range(1))
-	o = "".join(random.choice(t)for i in range(1))
-	b = "".join(random.choice(n)for i in range(1))
-	c = "".join(random.choice(m)for i in range(1))
-	d= "".join(random.choice(g)for i in range(1))
-			
-	if cho==1:
-		user = a+o+'.'+b+o
-		print(user)
-			
-	if cho==2:
-		user = a+o+'_'+b+d
-		print(user)
-		
-			
-	url= 'https://www.instagram.com/api/v1/web/accounts/web_create_ajax/attempt/'
-	he = {
-			'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'Accept-Language': 'en-US,en;q=0.9', 'Content-Length': '65', 'Content-Type': 'application/x-www-form-urlencoded', 'Cookie': 'csrftoken=AImmzluk6xjPB1fmBY7xVE5wlHpvhl8I; mid=ZP_ZUQABAAHu1nPtyQOyuErC0lHG; ig_did=072E2501-E264-49A3-A431-A97AB70F7B9F; ig_nrcb=1; datr=Vdn_ZNg_QDqUksZZlJf6WHxv; dpr=2.7853219509124756', 'Dpr': '2.78532', 'Origin': 'https://www.instagram.com', 'Referer': 'https://www.instagram.com/accounts/emailsignup/', 'Sec-Ch-Prefers-Color-Scheme': 'light', 'Sec-Ch-Ua': '"Not)A;Brand";v="24", "Chromium";v="116"', 'Sec-Ch-Ua-Full-Version-List': '"Not)A;Brand";v="24.0.0.0", "Chromium";v="116.0.5845.72"', 'Sec-Ch-Ua-Mobile': '?0', 'Sec-Ch-Ua-Model': '""', 'Sec-Ch-Ua-Platform': '"Linux"', 'Sec-Ch-Ua-Platform-Version': '""', 'Sec-Fetch-Dest': 'empty', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Site': 'same-origin', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36', 'Viewport-Width': '967', 'X-Asbd-Id': '129477', 'X-Csrftoken': 'AImmzluk6xjPB1fmBY7xVE5wlHpvhl8I', 'X-Ig-App-Id': '936619743392459', 'X-Ig-Www-Claim': '0', 'X-Instagram-Ajax': '1008575226', 'X-Requested-With': 'XMLHttpRequest'}
-			
-	da = {'email': '', 
-			'first_name': '',
-			 'username': user, 
-			 'opt_into_one_tap': 'false'}
-			
-	re = requests.post(url,headers=he,data=da).text
-			 
-	if '''{"account_created": false, "errors": {"email": [{"message": "This field is required.", "code": "email_required"}], "__all__": [{"message": "Create a password at least 6 characters long.", "code": "too_short_password"}]}, "dryrun_passed": false, "username_suggestions": [], "status": "ok", "error_type": "form_validation_error"}''' in re:
-		print(F+f' [user] ✔ ')
-		
-		tt = f"""
-		~~~~~~~~~~~~~~~~~~
-   				وصلك يوزࢪ ☑️
-		~ [{user}] ~
-		
-		المطوࢪه / @U_J_3
-	@z_v_1  /القناة 
-	~~~~~~~~~~~~~~~~~~~
 """
-		requests.post(f"https://api.telegram.org/bot{tok}/sendMessage?chat_id={id}&text="+str(tt))
-			
-	else:print(X+f' [user] ✘ ')
+
+print( zebz)
+token = input(Back.YELLOW + 'ENTER YOUR TOKEN: ')
+os.system('clear')
+print(E+'من تشغل الاداه جاوب خاص')
+def mahos(user):
+    global gg, bb
+    cookies = {
+        'mid': 'ZbYvEAABAAGbliASkVBpDVWAY_pH',
+        'ig_did': '855D0C80-6CE9-4CD8-9422-80716840E82B',
+        'datr': 'Dy-2ZZJdYLgoAXx26YCKgQPq',
+        'ps_n': '0',
+        'ps_l': '0',
+        'fbm_124024574287414': 'base_domain=.instagram.com',
+        'ig_nrcb': '1',
+        'shbid': '"12527\\05452590120684\\0541740214349:01f76395e1e0f3c3bbe6bbb58d67a648bc61dd8dc9ca27e39c09a0fedf69baadccfe5b26"',
+        'shbts': '"1708678349\\05452590120684\\0541740214349:01f71aba558f78800585763c100b904c416fca805fdc34aeccf83eee1a7703bce05e5fcf"',
+        'csrftoken': 'WzQWLAi94BDiPqzwrwFuGaU8vzrPHhlD',
+        'ds_user_id': '53186034340',
+        'fbsr_124024574287414': 'xgY8i0_LuQl5c2L-VADm_0_9rFidsyApgBzLaltH7ck.eyJ1c2VyX2lkIjoiMTAwMDc5NzAzODA3MDUzIiwiY29kZSI6IkFRRDN2SzdEUXJfc1pHSzVNRFVTQ2ZUMXhzSVdjT1R6LW5iRFM1RFYzdmZTM0RDZWN6QUNHeTBFWVhLYVZkdEZkTEkxUkFvaFE2aWFvQmxISU5pVW1ydnlnQlVFZjhGOElLY2VhVFZuUW5IdlpybGJNREoxb0dxX1lOMm1PZmpKdHhMak9QZW02ZmRYcXp5NUhGeDdnSVlab3lEUjJ6bmFmbTE2WjRlYnF5SkRNbWdqZWwtZVBtbHk5WnU3MFRzS2VQVFdDRGNjOEFNRUttbTVkRmd4YTVEeVdhVkJySEtzM2RNYzNCN2l1elJoZ3NaTHBSbC1DS0QtMERnekgyeE9MMUVlcGdRZWlJcGpZdlYtTERKUU5VQXByd1lJRi1CY2xEQWRGX3Z2NGFxRXBTTjZ3WVVqSnlsX3ExYjVQNTJjUTY3VzBhOVZmZ09hbEdWS1RRa1hwb1pyIiwib2F1dGhfdG9rZW4iOiJFQUFCd3pMaXhuallCTzFPMDRBcXhJWkF5VVRtOHhFVTRnTFJrZUJXalVUNFpDdlpBZGdzd0tlODZCd0JuellIbDljdTdoNzhoSGVjTENVZ1lBejVvRnZvS2E4T0JHSDFyam1JWkJ3aHhGYVhTZnRMbzhaQ0J5WkM5bXFnbzRWWFRRclJXajh1Q0p0bnlGOENocXhIeFpBQkoyd3hsSFpCU1BXMm00aDB4cHpSSlpBdTJGcmtHMnRwM2dKNUFmc1VtVER4dHZlVXdaRCIsImFsZ29yaXRobSI6IkhNQUMtU0hBMjU2IiwiaXNzdWVkX2F0IjoxNzA4NzU3MTQyfQ',
+        'rur': '"CLN\\05453186034340\\0541740293151:01f7505815bf59bf34f381061daea65afbe0b8556c3933ca0199de747c8e403d66b76778"',
+        'dpr': '2.1988937854766846',
+    }
+
+    headers = {
+        'authority': 'www.instagram.com',
+        'accept': '*/*',
+        'accept-language': 'ar-YE,ar;q=0.9,en-YE;q=0.8,en-US;q=0.7,en;q=0.6',
+        'content-type': 'application/x-www-form-urlencoded',
+        'dpr': '2.19889',
+        'origin': 'https://www.instagram.com',
+        'referer': 'https://www.instagram.com/accounts/emailsignup/',
+        'sec-ch-prefers-color-scheme': 'dark',
+        'sec-ch-ua': '"Not)A;Brand";v="24", "Chromium";v="116"',
+        'sec-ch-ua-full-version-list': '"Not)A;Brand";v="24.0.0.0", "Chromium";v="116.0.5845.72"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-model': '""',
+        'sec-ch-ua-platform': '"Linux"',
+        'sec-ch-ua-platform-version': '""',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-origin',
+        'user-agent': generate_user_agent(),
+        'viewport-width': '891',
+        'x-asbd-id': '129477',
+        'x-csrftoken': 'WzQWLAi94BDiPqzwrwFuGaU8vzrPHhlD',
+        'x-ig-app-id': '936619743392459',
+        'x-ig-www-claim': 'hmac.AR39C0bslX48JTL3qnOmZoE2uaWZTpE8eYQODkG0TN-NL3aJ',
+        'x-instagram-ajax': '1011632956',
+        'x-requested-with': 'XMLHttpRequest',
+    }
+
+    data = {
+        'enc_password': '#PWD_INSTAGRAM_BROWSER:10:1708757243:AdBQAKpnJMEagksjmKCubfnpEXeVya4k0v8QwpO8sfrA6HUPGOMXIlhsGyD7VxfDZhtih3+0RkcUC8q2CxAg46Vnwj73Gy2ua81ckcDZmaFlj4Q8Yerp3ZwVvyZreu20DfSwOShEcNX4rCzZDyDAXeC+qA==',
+        'email': 'mahosllll@mahos.com',
+        'first_name': 'Ahmed',
+        'username': f'{user}',
+        'client_id': 'ZbYvEAABAAGbliASkVBpDVWAY_pH',
+        'seamless_login_enabled': '1',
+        'opt_into_one_tap': 'false',
+    }
+
+    res = requests.post(
+        'https://www.instagram.com/api/v1/web/accounts/web_create_ajax/attempt/',
+        cookies=cookies,
+        headers=headers,
+        data=data,
+    ).text
+    if '"errors"' in res and '"username_is_taken"' in res and '"dryrun_passed": false,' in res or 'username_has_special_char' in res:
+        bb += 1
+        print(Back.RED + f'[{bb}] Bad Username : {user}')
+    elif '"dryrun_passed":true,' in res:
+        gg += 1
+        print(Back.GREEN + f'[{gg}] Available Username {user}')
+        tlg = f'''
+        Hi hunt Username INSTAGRM
+        . ------------------------------------->
+        [(҂⌣̀_⌣́)] --->{user} 
+        .  ------------------------------------->
+        [(ToT)] BY : @U_J_3'''
+        requests.post(f'https://api.telegram.org/bot{token}/sendMessage?chat_id={ID}&text={tlg}')
+        print(tlg)
+    else:
+        print(res)
+def randomusers():
+    while True:        
+        KK ="1234567890qwertyuiopasdfghjklzxcvbnm"
+        zz = "1234567890"
+        z1 = "._"
+        ZEBZ=''.join(random.choices(KK, k=1))
+        ZEBZ2=''.join(random.choices(KK, k=1))
+        ZEBZ3=''.join(random.choices('_', k=1))
+        ZEBZ4=''.join(random.choices('_', k=1))
+        ZEBZ5=''.join(random.choices(KK, k=1))
+        ALL=ZEBZ+ZEBZ2+ZEBZ3+ZEBZ4+ZEBZ5
+        user = ALL
+        mahos(user)
+randomusers()
