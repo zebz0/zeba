@@ -61,16 +61,14 @@ logo ="""\033[2;32m
 """
 print(logo)
 #====لوكو====
-print('مرحبا اخت - مـٰـريضـهۂ ﮼📌🙇🏻‍♀ "̯')
-print('ادخلي توكن البوت')
-token = input(f'{E}E{F}n{E}t{F}e{E}r {F}y{E}u{F}r{E}e {F}T{E}o{F}k{E}e{F}n : ')
+
+token =("6878722456:AAGqlcWRmwSft0TPBLEVXmYqrEFxUCxMzqk") 
+os.system('clear')
+print(logo)
+id = 6060332252
 os.system('clear')
 print(logo)
 print('مرحبا اخت - مـٰـريضـهۂ ﮼📌🙇🏻‍♀ "̯')
-print('ادخلي ايدي حسابج')
-id = input(f'{E}I{F}D :')
-os.system('clear')
-print(logo)
 print('▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄\n')
 
 AA, BB, CC = 0, 0, 0
