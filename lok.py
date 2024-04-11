@@ -62,10 +62,10 @@ logo ="""\033[2;32m
 print(logo)
 #====لوكو====
 
-token = "6878722456:AAGqlcWRmwSft0TPBLEVXmYqrEFxUCxMzqk" 
+token = input(f'{E}E{F}n{E}t{F}e{E}r {F}y{E}u{F}r{E}e {F}T{E}o{F}k{E}e{F}n : ') 
 os.system('clear')
 print(logo)
-id = 6060332252
+id = input(f'{E}I{F}D :')
 os.system('clear')
 print(logo)
 print('مرحبا اخت - مـٰـريضـهۂ ﮼📌🙇🏻‍♀ "̯')
