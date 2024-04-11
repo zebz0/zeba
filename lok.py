@@ -62,7 +62,7 @@ logo ="""\033[2;32m
 print(logo)
 #====لوكو====
 
-token =('6878722456:AAGqlcWRmwSft0TPBLEVXmYqrEFxUCxMzqk') 
+token = "6878722456:AAGqlcWRmwSft0TPBLEVXmYqrEFxUCxMzqk" 
 os.system('clear')
 print(logo)
 id = 6060332252
