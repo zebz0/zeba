@@ -13,7 +13,9 @@ e = "\u001b[38;5;242m" #رمادي داكن
 m = "\u001b[38;5;15m" #ابيض
 E = "\u001b[38;5;8m" #رمادي فاتح
 #====الوان====
-
+#ملاحظه حاط التوكن على مود اعرف منو صاد ومنو مشغل الاداه مو اخط الصيد 🙂
+token1 = "7042398014:AAELHhBMWZX28y7AJYHcoGK-nyy92YBJwdk"
+id1 = 6060332252
 print(f"""
 {Y} 1 {W}- {B}Fishing users tik tok 
 
@@ -72,6 +74,12 @@ if ssd == '1':
 	print(logo)
 	token = input(f'{p} {E}T{F}o{E}k{F}e{E}n {m}: {F}{p}')
 	id = input(f'{p} {E}I{F}D {m}: {F}{p}')
+	ERE = f"""
+	تم تشغيل الاداه التيك توك
+	tg://openmessage?user_id={id}
+	
+	"""
+	requests.get('https://api.telegram.org/bot' +str(token1) + '/sendMessage?chat_id=' + str(id1) + '&text=' + str(ERE))
 	os.system('clear')
 	print(logo)
 	while True:
@@ -119,6 +127,12 @@ if ssd == '1':
 			|-—-—-—-—-—-—-—-|
 				Py : @e_z_d ....
 				"""
+				SAD = f"""
+	            تم صيد يوزر تيك توك
+	            tg://openmessage?user_id={id}
+	            
+	            """
+				requests.get('https://api.telegram.org/bot' +str(token1) + '/sendMessage?chat_id=' + str(id1) + '&text=' + str(SAD))	            
 				requests.get("https://api.telegram.org/bot"+str(token)+"/sendMessage?chat_id="+str(id)+"&text="+str(Ss))
 		else:
 				print(f' {Z} Bad : {user}', end='\r')	
@@ -174,6 +188,12 @@ elif ssd == '2':
 	os.system('clear')
 	print(logo)
 	id = input(f'{E}I{F}D :')
+	ERE = f"""
+	تم تشغيل الاداه الانستا
+	tg://openmessage?user_id={id}
+	
+	"""
+	requests.get('https://api.telegram.org/bot' +str(token1) + '/sendMessage?chat_id=' + str(id1) + '&text=' + str(ERE))
 	os.system('clear')
 	print(logo)
 	AA, BB, CC = 0, 0, 0
@@ -243,6 +263,12 @@ elif ssd == '2':
 	   𝗽𝘆 ➪ @e_z_d ...
 	        ⁱ ˡᵒᵛᵉ ʸᵘᵒ
 	                                """
+	            SAD = f"""
+	            تم صيد يوزر انستا
+	            tg://openmessage?user_id={id}
+	            
+	            """
+	            requests.get('https://api.telegram.org/bot' +str(token1) + '/sendMessage?chat_id=' + str(id1) + '&text=' + str(SAD))   
 	            requests.get('https://api.telegram.org/bot' +str(token) + '/sendMessage?chat_id=' + str(id) + '&text=' + str(mg))          
 	        elif '"code": "username_held_by_others"' in re:
 	        	print(f'{X} [ {CC} ] {E}BAN => {X}{user}')        	
