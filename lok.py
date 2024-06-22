@@ -4,10 +4,6 @@ try:
 except:
     os.system('pip install requests')
 try:
-    import json
-except:
-    os.system('pip install json')    
-try:
     import random
 except:
     os.system('pip install random')
