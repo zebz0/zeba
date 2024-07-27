@@ -1,112 +1,44 @@
-import os, requests, random, threading
+import requests, random, threading, pazok
 from user_agent import *
-try:
-    import pazok
-except:
-    os.system('pip install pazok')             
-#====الوان====
+
+
 Z = '\033[1;31m'  # أحمر
-X = '\033[1;33m'  # أصفر
+X = '\033[1;33m' #اصفر
 F = '\033[2;32m'  # أخضر
-C = "\033[1;97m"  # أبيض
-B = '\033[2;36m'  # أزرق
-Y = '\033[1;34m'  # أزرق داكن
-W = '\033[0;37m'  # رمادي
 e = "\u001b[38;5;242m" #رمادي داكن
 m = "\u001b[38;5;15m" #ابيض
 E = "\u001b[38;5;8m" #رمادي فاتح
-p = '\x1b[1m'#عريض
-#====الوان====
-logo ="""\033[2;36m⠀\x1b[1m⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣼⣿⣿⣿⣿⣿⣿⣿⣿⣦⣄⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠈⠻⣿⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⣼⡿⠉⠀⣀⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⢰⠋⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡝⠛⠉⠉⠉⠉⠉⠻⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠜⢻⡿⣿⣿⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢋⣽⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣠⡿⠋⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣰⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⡿⢀⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡝⠀⠀⠀⠈⠉⠛⠿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣷⣶⣤⡔⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣝⢿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⡿⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠈⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠈⠛⣛⣛⣂⣀⣀⣀⠀⣀⣀⣀⣀⣀⣀⡀⣈⣉⣀⣀⣀⠀⠀⣀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣿⣿⠋⢉⡻⣿⣿⣿⣿⣿⣿⠀⠀⣿⣿⠛⢻⣿⡿⠀⠛⣿⡟⠛⢻⣿⡇⠙⣿⡟⠛⢻⣿⡄⣿⣿⠛⣻⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⣿⣿⡄⠈⢿⣷⡹⣿⣿⣿⣿⣿⡃⠀⢀⣴⣿⠏⠀⠀⠀⣿⣷⣶⠀⠀⠀⠀⣿⣷⣶⣾⣿⠁⠀⢀⣴⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣿⣧⠀⠘⣿⣿⣌⢻⣿⣿⡟⠁⣠⣾⣟⣁⣰⣶⠀⠀⣿⡇⠀⢰⣶⡆⠀⣿⣇⠀⣸⣿⠇⣠⣿⣟⣁⣰⣶⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣧⠀⠘⣿⣿⣷⣍⢿⠀⠀⠛⠛⠛⠛⠛⠛⠀⠛⠛⠛⠛⠛⠛⠃⠛⠛⠛⠛⠛⠋⠀⠛⠛⠛⠛⠛⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠲⠀⠀⠻⣿⣿⣷⣜⡻⠿⣿⣿⣿⣿⣶⡦⠤⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⣿⣿⣿⣶⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⣿⣿⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠛⠷⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+Aa =0
+Bb = 0
+token="7082657991:AAFkfDXT5U9fcgdGXBHk8L9ewGvmjKJN0tI"
+id=662667108
 
-"""
-print(logo)
-#====لوكو====
-
-token = input(f' {E} Enter The {B}Token :{E} ')
-id = input(f' {E} Enter The {B}ID :{E} ')
-os.system('clear')
-print("—"*60)
-print(logo)
-print("—"*60)
-
-ses=requests.Session()
-url = "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt"
-try:
-    prox = requests.get(url).text
-    open('.Proxs.txt', 'w').write(prox) 
-except Exception as e:
-    print('\x1b[1;91mError: \x1b[96m{}'.format(e))
-prox = open('.Proxs.txt', 'r').read().splitlines()
 def cc():
     while True:
-        a1 = "qwertyuiopasdfghjklzxcvbnm1234567890"
-        a2 = "qwertyuiopasdfghjklzxcvbnm1234567890"
-        a3 = "qwertyuiopasdfghjklzxcvbnm1234567890"
-        a4 = "qwertyuiopasdfghjklzxcvbnm1234567890"
-        a5 = "qwertyuiopasdfghjklzxcvbnm1234567890"
-        a6 = "qwertyuiopasdfghjklzxcvbnm1234567890"
-        a7 = "qwertyuiopasdfghjklzxcvbnm1234567890"
-        v1 = ''.join(random.choices(a1))
-        v2 = ''.join(random.choices(a1))
-        v3 = ''.join(random.choices(a1))
-        v4 = ''.join(random.choices(a1))
-        v5 = ''.join(random.choices(a1))
-        v6 = ''.join(random.choices(a1))
-        v7 = ''.join(random.choices(a1))
-        user1 = v1+'__'+v2+v3
-        user2 = '_'+v1+v1+v5+v5
-        user3 = '_'+v1+v1+v2+v2
-        user4 = v1+v2+v1+'.'+v2     
-        user5 = v1+v1+v2+v2+v3
-        user6 = v1+v2+v2+'_'+v1
-        user7 = v1+v2+v1+'_'+v1
-        user8 = v1+v2+v1+v2+'_'
-        user9 = '__'+v1+v2+v1
-        user10 = '_'+'.'+v1+v6+v7
-        user11 = v1+v2+v2+'.'+v1
-        user12 = v1+'_'+v1+v3+v3
-        user13 = v1+'_'+'.'+'_'+v2
-        user14 = v6+'.'+v7+v5+v4
-        user15 = v1+v2+'.'+v2+v1
-        user16 = '__'+v1+v2+'_'
-        user17 = v1+'_'+v2+'__'
-        user18 = v1+'.'+v2+'.'+v3
-        user19 = v1+'_'+v1+v2+v2
-        user20 = '_'+v1+v2+v1+v1
-        Rre =user1,user2,user3,user4,user5,user6,user7,user8,user9,user10,user11,user12,user13,user14,user15,user16,user17,user18,user19,user20
-        user = ''.join(random.choices(Rre,k=1))
+        global Aa, Bb
+        uu = "qwertyuioplkjhgfdsamnbvcxz1234567890_"
+        a="".join(random.choice(uu)for i in range(1))
+        b="".join(random.choice(uu)for i in range(1))
+        c="".join(random.choice(uu)for i in range(1))
+        d="".join(random.choice(uu)for i in range(1))
+        b="".join(random.choice(uu))
+        c="".join(random.choice(uu))
+        d="".join(random.choice(c))
+        e="".join(random.choice(d))
+        user1 ='_'+b+c+d+e
+        user2 = b+'_'+c+d+e
+        user3 = e+b+'_'+c+d
+        user4 = e+b+c+'_'+d        
+        s1 ='_'+a+a+b+b
+        s2 = a+'_'+a+b+b
+        s3 = a+a+'_'+b+b
+        s4 = '_'+a+b+'_'+b
+        s5 = a+a+a+a+b
+        zebz = s1,s2,s3,s4,s5,user1,user2,user3,user4
+        user =random.choice(zebz)
         url = 'https://www.instagram.com/api/v1/web/accounts/web_create_ajax/attempt/'
+        
         headers = {
             'authority': 'www.instagram.com',
             'accept': '*/*',
@@ -126,39 +58,39 @@ def cc():
             'sec-fetch-site': 'same-origin',
             'user-agent': str(generate_user_agent()),
             'x-asbd-id': '129477',
-            'x-csrftoken': 't7OXhwnoZOxph4oyq6Fuyd6ERG0tbyGz',
+            'x-csrftoken': 'uBfsWtwDTXF4HPrDRO1Emh5rk0oggwpK',
             'x-ig-app-id': '936619743392459',
             'x-ig-www-claim': '0',
-            'x-instagram-ajax': '1014458754',
+            'x-instagram-ajax': '1015175619',
             'x-requested-with': 'XMLHttpRequest',
         }
         
         data = {
-            'enc_password': '#PWD_INSTAGRAM_BROWSER:0:1719328029:jjfjxhgkgxytvyj',
-            'email': 'zebz120zebz@gmail.com',
+            'enc_password': '#PWD_INSTAGRAM_BROWSER:0:1722002107:sjbeejshe',
+            'email': 'shaheen@gmail.com',
             'first_name': 'zebz',
-            'username': f'{user}',
+            'username': user,
+            'client_id': '16gv3b81s0f9rf1jol29ph9pso91i1s38x16a8il51ar301z14a445p',
+            'seamless_login_enabled': '1',
             'opt_into_one_tap': 'false',
         }
         
         re = requests.post(url, headers=headers, data=data).text
         if '"dryrun_passed":true' in re:
-            print(f'{F} GOOD{B} → {F} {user}')
+            Aa +=1
+            print(f' {E}[ {Bb} ] {F} GOOD USER : {E} {user}')
             RRT = f"""
- GOOD USER INSTAGRAM           
-◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇
-
-user → `{user}`
-
-◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇      
-      
-            """
-            pooo=[
-"المطور",f"t.me/e_z_d",
-            ]
-            pazok.tele_ms(token,id,txt=RRT,buttons=pooo)            
+{user}
+  Done
+  Attempt : {Bb}
+"""            
+            requests.post(f"https://api.telegram.org/bot{token}/sendMessage?chat_id={id}&text="+str(RRT))
+            
+        elif '"spam":true' in re:
+        	print(f'{X} VPN ')   
         else:
-            print(f'{Z} Bad{B} → {Z} {user}', end='\r')    
+            Bb +=1
+            print(f' {E}[ {Bb} ] {Z} BAD USER : {E} {user}', end='\r')
 Threads = []
 for t in range(5):
     x = threading.Thread(target=cc)
